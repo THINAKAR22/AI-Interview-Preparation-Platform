@@ -1,121 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import Dashboard from "./pages/Dashboard";
+import MockInterview from "./pages/MockInterview";
+import CodingArena from "./pages/CodingArena";
+import HRQuestions from "./pages/HRQuestions";
+import ResumeAnalyzer from "./pages/ResumeAnalyzer";
+import Progress from "./pages/Progress";
+import Profile from "./pages/Profile";
+import BottomNav from "./components/bottomnavbar";
+import TopNav from "./components/topnavbar";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [page, setPage] = useState("dashboard");
+  const [interviewType, setInterviewType] = useState(null);
+
+  const navigate = (p, extra) => {
+    setPage(p);
+    if (extra) setInterviewType(extra);
+  };
+
+  const renderPage = () => {
+    switch (page) {
+      case "dashboard": return <Dashboard navigate={navigate} />;
+      case "mock-interview": return <MockInterview navigate={navigate} type={interviewType} />;
+      case "coding": return <CodingArena navigate={navigate} />;
+      case "hr": return <HRQuestions navigate={navigate} />;
+      case "resume": return <ResumeAnalyzer navigate={navigate} />;
+      case "progress": return <Progress navigate={navigate} />;
+      case "profile": return <Profile navigate={navigate} />;
+      default: return <Dashboard navigate={navigate} />;
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <div style={{ background: "#0D0F14", minHeight: "100vh", fontFamily: "'DM Sans', sans-serif", color: "#E8EAF0" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+          --bg: #0D0F14; --s1: #141720; --s2: #1A1E2B; --border: #2A2F42;
+          --accent: #6C63FF; --green: #00D4AA; --red: #F06595; --amber: #FBBF24;
+          --text: #E8EAF0; --muted: #7B8099; --dim: #4A5068;
+          --fh: 'Syne', sans-serif; --fb: 'DM Sans', sans-serif; --fm: 'JetBrains Mono', monospace;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        button { cursor: pointer; font-family: var(--fb); }
+        input, textarea, select { font-family: var(--fb); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fade-in { animation: fadeIn 0.3s ease forwards; }
+      `}</style>
+      <TopNav page={page} navigate={navigate} />
+      <div style={{ paddingBottom: 64 }}>{renderPage()}</div>
+      <BottomNav page={page} navigate={navigate} />
+    </div>
+  );
 }
-
-export default App
