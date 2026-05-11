@@ -1,0 +1,163 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, poppins, sans-serif;
+}
+
+/* APP LAYOUT */
+.app {
+  display: flex;
+  height: 100vh;
+  background: #7171ad;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background: #333363;
+  border-right: 1px solid #5e5ea7;
+  padding: 24px 18px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+}
+
+/* LOGO */
+.brand {
+  display: flex;
+  align-items: center;
+  color: aliceblue;
+
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  gap: 8px;
+}
+
+/* BUTTONS */
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 14px 16px;
+  border-radius: 20px;
+
+  color: #d1d5db;
+  text-decoration: none;
+
+  transition: 0.3s;
+}
+
+/* HOVER */
+.menu a:hover {
+  background: #b7cfd1;
+}
+
+/* MAIN CONTENT */
+.content {
+  flex: 1;
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-box {
+  width: 420px;
+  height: 52px;
+
+  background: rgba(255,255,255,0.03);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0 18px;
+}
+
+.search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+}
+
+.start-btn {
+  background: linear-gradient(
+    135deg,
+    #654dd1,
+    #8f6bff
+  );
+
+  color: white;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 14px 24px;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 0 20px rgba(123,92,255,0.4);
+
+  cursor: pointer;
+}
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.02),
+    rgba(123,92,255,0.08)
+  );
+
+  border-radius: 24px;
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  padding: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active {
+  background: linear-gradient(
+    90deg,
+    rgba(123,92,255,0.35),
+    rgba(123,92,255,0.8)
+  );
+
+  color: white;
+
+  box-shadow: 0 0 20px rgba(123,92,255,0.3);
+}

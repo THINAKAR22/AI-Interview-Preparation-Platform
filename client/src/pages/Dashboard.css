@@ -1,0 +1,13 @@
+.min-h-screen {
+  height: 50px;
+  width : 50px;
+  display: flex;    
+  flex-direction: row;
+}
+
+.min-h-screen p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 20px;
+  justify-content: center;
+}
