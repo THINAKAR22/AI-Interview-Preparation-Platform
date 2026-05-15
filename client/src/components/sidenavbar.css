@@ -26,20 +26,6 @@ body {
   flex-direction: column;
 }
 
-.img {
-  width: 50px;
-  height: 50px;
-}
-
-/* LOGO */
-.brand {
-  display: flex;
-  align-items: center;
-  color: aliceblue;
-
-  gap: 12px;
-  margin-bottom: 20px;
-}
 
 /* MENU */
 .menu {
@@ -53,6 +39,7 @@ body {
 .menu a {
   display: flex;
   align-items: center;
+  font-weight: 500;
   gap: 14px;
 
   padding: 14px 16px;
@@ -66,7 +53,14 @@ body {
 
 /* HOVER */
 .menu a:hover {
-  background: #b7cfd1;
+  background: rgba(255,255,255,0.08);
+  transform: translateX(4px);
+}
+
+.menu a {
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
 }
 
 /* MAIN CONTENT */
@@ -83,31 +77,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.search-box {
-  width: 420px;
-  height: 52px;
-
-  background: rgba(255,255,255,0.03);
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  border-radius: 14px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 0 18px;
-}
-
-.search-box input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: white;
-  width: 100%;
 }
 
 .start-btn {
@@ -139,7 +108,7 @@ body {
     rgba(123,92,255,0.08)
   );
 
-  border-radius: 24px;
+  border-radius: 20px;
 
   border: 1px solid rgba(255,255,255,0.06);
 

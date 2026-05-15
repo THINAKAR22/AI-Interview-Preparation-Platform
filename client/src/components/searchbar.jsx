@@ -2,7 +2,8 @@ import './searchbar.css';
 
 export default function SearchBar() {
   return (
-    <div className="search-container">
+    <div className="search-wrapper">
+      <div className="search-container">
 
       <input
         type="text"
@@ -14,6 +15,7 @@ export default function SearchBar() {
         🔍
       </button>
 
+    </div>
     </div>
   );
 }

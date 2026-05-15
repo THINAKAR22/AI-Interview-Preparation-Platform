@@ -7,13 +7,9 @@ export default function SidebarLayout() {
 
       {/* SIDEBAR */}
       <aside className="sidebar">
-        <div className="brand">
-          <img src={logo} alt="Logo" className="img" />
-          <h2>PrepAI</h2>
-        </div>
 
         <nav className="menu">
-          <a href="/dashboard">🏠 Dashboard</a>
+          <a href="/dashboard" className='active'>🏠 Dashboard</a>
           <a href="/coding-arena">💻 Coding Arena</a>
           <a href="/mock-interview">🎤 Mock Interview</a>
           <a href="/resume-analyzer">📄 Resume Analyzer</a>

@@ -1,0 +1,183 @@
+/* TOP NAVBAR */
+.topnav {
+  background: #141720;
+  border-bottom: 1px solid #2A2F42;
+
+  padding: 12px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* LEFT SECTION */
+.topnav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* CENTER SECTION */
+.topnav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  margin: 0px 20px 0px 40px;
+}
+
+/* LOGO */
+.logo {
+  font-family: var(--fh);
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #6C63FF;
+
+  cursor: pointer;
+}
+
+.logo span {
+  color: #00D4AA;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  gap: 4px;
+
+  margin-left: 20px;
+}
+
+.logo .img {
+  width: 50px;
+  height: 50px;
+}
+
+/* SEARCH BAR */
+.search-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  background: #1A1E2B;
+  border-radius: 20px;
+  padding: 8px 12px;
+  gap: 10px;
+  border: 1px solid #2A2F42;
+  transition: all 0.3s ease;
+}
+
+.search-container:focus-within {
+  border-color: #6C63FF;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  padding: 8px 12px;
+  color: #E8EAF0;
+  font-family: inherit;
+}
+
+.search-input::placeholder {
+  color: #7B8099;
+}
+
+.search-btn {
+  border: none;
+  background: #6C63FF;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.search-btn:hover {
+  background: #5A52E0;
+  transform: scale(1.05);
+}
+
+/* NAV BUTTONS */
+.nav-btn {
+  background: transparent;
+  border: none;
+
+  padding: 6px 14px;
+
+  font-size: 12px;
+
+  color: #7B8099;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+/* ACTIVE BUTTON */
+.nav-btn.active {
+  background: #4c63af;
+  color: #E8EAF0;
+}
+
+/* HOVER EFFECT */
+.nav-btn:hover {
+  background: #1A1E2B;
+  color: #E8EAF0;
+
+  transform: translateY(-2px);
+}
+
+/* RIGHT SECTION */
+.topnav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* PROFILE BUTTON */
+.profile-btn {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #6C63FF,
+    #00D4AA
+  );
+
+  border: none;
+
+  color: white;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+/* PROFILE HOVER */
+.profile-btn:hover {
+  transform: scale(1.08);
+}
