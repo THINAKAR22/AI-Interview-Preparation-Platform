@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useState } from 'react';
 import './Dashboard.css';
 import SidebarLayout from '../components/sidenavbar';
 import TopNav from '../components/topnavbar';
@@ -253,6 +254,22 @@ function Dashboard() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={weeklyProgressData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="day" stroke="#9ca3af" />
+                <YAxis stroke="#9ca3af" />
+                <Tooltip
+                  contentStyle={{
+                    background: '#ffffff',
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                  }}
+                />
+                <Bar dataKey="solved" fill="#6366f1" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="target" fill="#e5e7eb" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
 
           {/* Topic Performance */}
@@ -365,8 +382,10 @@ function Dashboard() {
 
         {/* Content Grid */}
         <div className="content-grid">
+        {/* Content Grid */}
+        <div className="content-grid">
           {/* Recent Activity */}
-          <div className="card card-large">
+          <div className="content-card">
             <div className="card-header">
               <h3>Recent Activity</h3>
               <a href="#" className="link-view-all">
@@ -437,5 +456,8 @@ function Dashboard() {
     </>
   );
 }
+
+// Icon imports for activity types
+import { FiCode, FiMic, FiDatabase } from 'react-icons/fi';
 
 export default Dashboard;
