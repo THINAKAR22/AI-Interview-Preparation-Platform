@@ -12,7 +12,7 @@ import {
   FiArrowRight,
   FiPlay,
   FiBook,
-  FiBarChart3,
+  FiBarChart2,
   FiZap,
   FiCheck,
   FiCalendar,
@@ -425,7 +425,7 @@ function Dashboard() {
             Browse Topics
           </button>
           <button className="action-button action-secondary">
-            <FiBarChart3 size={18} />
+            <FiBarChart2 size={18} />
             View Analytics
           </button>
           <button className="action-button action-secondary">

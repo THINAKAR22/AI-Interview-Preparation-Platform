@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useState } from 'react';
 import './Dashboard.css';
 import SidebarLayout from '../components/sidenavbar';
 import TopNav from '../components/topnavbar';
@@ -13,7 +12,7 @@ import {
   FiArrowRight,
   FiPlay,
   FiBook,
-  FiBarChart3,
+  FiBarChart2,
   FiZap,
   FiCheck,
   FiCalendar,
@@ -382,8 +381,6 @@ function Dashboard() {
 
         {/* Content Grid */}
         <div className="content-grid">
-        {/* Content Grid */}
-        <div className="content-grid">
           {/* Recent Activity */}
           <div className="content-card">
             <div className="card-header">
@@ -444,7 +441,7 @@ function Dashboard() {
             Browse Topics
           </button>
           <button className="action-button action-secondary">
-            <FiBarChart3 size={18} />
+            <FiBarChart2 size={18} />
             View Analytics
           </button>
           <button className="action-button action-secondary">
