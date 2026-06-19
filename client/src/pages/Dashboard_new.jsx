@@ -1,7 +1,7 @@
 import './Dashboard.css';
 import SidebarLayout from '../components/sidenavbar';
 import TopNav from '../components/topnavbar';
-import heroArt from '../assets/hero.png';
+import heroArt from '../assets/logo.png';
 
 import {
   FiArrowRight,
