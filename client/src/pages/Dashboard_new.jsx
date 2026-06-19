@@ -82,8 +82,6 @@ const modules = [
 function Dashboard() {
   return (
     <>
-      <TopNav />
-      <SidebarLayout />
       <main className="dashboard-main dashboard-dark">
         <section className="dashboard-toolbar" aria-label="Dashboard tools">
           <label className="dashboard-search">

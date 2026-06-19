@@ -18,12 +18,6 @@ export default function SidebarLayout() {
         </nav>
       </aside>
 
-      {/* MAIN CONTENT */}
-      <main className="content">
-        <h1>Dashboard</h1>
-        <p>Welcome back bro 🚀</p>
-      </main>
-
     </div>
   );
 }
