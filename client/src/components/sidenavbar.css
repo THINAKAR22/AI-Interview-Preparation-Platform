@@ -11,13 +11,14 @@ body {
 /* APP LAYOUT */
 .app {
   display: flex;
-  height: 100vh;
   background: #7171ad;
+  
 }
 
 /* SIDEBAR */
 .sidebar {
   width: 260px;
+  min-height: calc(100vh - 60px);
   background: #333363;
   border-right: 1px solid #5e5ea7;
   padding: 24px 18px;
