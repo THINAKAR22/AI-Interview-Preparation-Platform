@@ -1,13 +1,16 @@
 import './topnavbar.css';
 import logo from '../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
 
-export default function TopNav({ page, navigate }) {
+export default function TopNav({ page }) {
+
+  const navigate = useNavigate();
 
   const links = [
     { id: "dashboard", label: "Dashboard" },
-    { id: "coding", label: "Practice" },
+    { id: "coding-arena", label: "Practice" },
     { id: "mock-interview", label: "Mock Tests" },
-    { id: "resume", label: "Resources" },
+    { id: "progress", label: "Progress" },
   ];
 
   return (
@@ -61,7 +64,7 @@ export default function TopNav({ page, navigate }) {
 
         <button
           className="profile-btn"
-          onClick={() => navigate("profile")}
+          onClick={() => navigate("/profile")}
         >
           TK
         </button>
