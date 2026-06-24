@@ -2,6 +2,7 @@ import './Dashboard.css';
 import SidebarLayout from '../components/sidenavbar';
 import TopNav from '../components/topnavbar';
 import heroArt from '../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 import {
   FiArrowRight,
@@ -80,6 +81,8 @@ const modules = [
 ];
 
 function Dashboard() {
+
+  const navigate = useNavigate();
   return (
     <>
       <main className="dashboard-main dashboard-dark">
@@ -98,7 +101,7 @@ function Dashboard() {
           <div className="hero-copy">
             <h1>Ace Your Dream Interview</h1>
             <p>Practice AI-powered mock interviews with instant feedback.</p>
-            <button className="hero-action">
+            <button className="hero-action" onClick={() => navigate("/mock-interview")}>
               Start a New Mock Interview
               <FiArrowRight size={18} />
             </button>
