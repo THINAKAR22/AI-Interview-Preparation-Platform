@@ -1,43 +1,48 @@
-import { useState } from 'react';
+import { NavLink } from "react-router-dom";
 import {
-  FiGrid, FiTarget, FiBook, FiBarChart2, FiCalendar,
-  FiZap, FiAward, FiSettings, FiHelpCircle, FiLogOut,
+  FiBarChart2,
   FiChevronRight,
-} from 'react-icons/fi';
+  FiFileText,
+  FiGrid,
+  FiHelpCircle,
+  FiLogOut,
+  FiMic,
+  FiSettings,
+  FiTarget,
+  FiUser,
+  FiZap,
+} from "react-icons/fi";
 
 const navGroups = [
   {
-    label: 'Main',
+    label: "Main",
     items: [
-      { icon: FiGrid,     label: 'Dashboard',   active: true,  badge: null },
-      { icon: FiTarget,   label: 'Interviews',  active: false, badge: '3' },
-      { icon: FiBook,     label: 'Topics',      active: false, badge: null },
-      { icon: FiBarChart2,label: 'Analytics',   active: false, badge: null },
+      { icon: FiGrid, label: "Dashboard", to: "/dashboard" },
+      { icon: FiMic, label: "Mock Interview", to: "/mock-interview", badge: "3" },
+      { icon: FiTarget, label: "Coding Arena", to: "/coding-arena" },
+      { icon: FiFileText, label: "Resume Analyzer", to: "/resume-analyzer" },
     ],
   },
   {
-    label: 'Practice',
+    label: "Workspace",
     items: [
-      { icon: FiZap,      label: 'Daily Challenge', active: false, badge: 'New' },
-      { icon: FiCalendar, label: 'Schedule',         active: false, badge: null },
-      { icon: FiAward,    label: 'Leaderboard',      active: false, badge: null },
+      { icon: FiBarChart2, label: "Progress", to: "/progress" },
+      { icon: FiUser, label: "Profile", to: "/profile" },
+      { icon: FiZap, label: "Daily Challenge", to: "/coding-arena", badge: "New" },
     ],
   },
 ];
 
 export default function SidebarLayout() {
-  const [active, setActive] = useState('Dashboard');
-
   return (
     <aside className="sidebar">
-      {/* Progress card */}
       <div className="sidebar-progress-card">
         <div className="progress-card-top">
           <span className="progress-card-label">Weekly Goal</span>
           <span className="progress-card-pct">68%</span>
         </div>
         <div className="progress-bar-track">
-          <div className="progress-bar-fill" style={{ width: '68%' }} />
+          <div className="progress-bar-fill" style={{ width: "68%" }} />
         </div>
         <p className="progress-card-sub">34 of 50 problems solved</p>
       </div>
@@ -46,32 +51,32 @@ export default function SidebarLayout() {
         {navGroups.map((group) => (
           <div key={group.label} className="nav-group">
             <p className="nav-group-label">{group.label}</p>
-            {group.items.map(({ icon: Icon, label, badge }) => (
-              <button
+            {group.items.map(({ icon: Icon, label, to, badge }) => (
+              <NavLink
                 key={label}
-                className={`nav-item ${active === label ? 'nav-item-active' : ''}`}
-                onClick={() => setActive(label)}
+                to={to}
+                className={({ isActive }) => `nav-item ${isActive ? "nav-item-active" : ""}`}
               >
-                <Icon size={18} className="nav-icon" />
+                {Icon({ size: 18, className: "nav-icon" })}
                 <span className="nav-label">{label}</span>
                 {badge && <span className="nav-badge">{badge}</span>}
-                {active === label && <FiChevronRight size={14} className="nav-arrow" />}
-              </button>
+                <FiChevronRight size={14} className="nav-arrow" />
+              </NavLink>
             ))}
           </div>
         ))}
       </nav>
 
       <div className="sidebar-footer">
-        <button className="nav-item">
+        <button className="nav-item" type="button">
           <FiSettings size={18} className="nav-icon" />
           <span className="nav-label">Settings</span>
         </button>
-        <button className="nav-item">
+        <button className="nav-item" type="button">
           <FiHelpCircle size={18} className="nav-icon" />
           <span className="nav-label">Help</span>
         </button>
-        <button className="nav-item nav-item-danger">
+        <button className="nav-item nav-item-danger" type="button">
           <FiLogOut size={18} className="nav-icon" />
           <span className="nav-label">Sign Out</span>
         </button>

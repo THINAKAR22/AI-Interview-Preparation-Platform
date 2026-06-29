@@ -1,7 +1,4 @@
-import { useState } from 'react';
 import './Dashboard.css';
-import SidebarLayout from '../components/sidenavbar';
-import TopNav from '../components/topnavbar';
 
 import {
   FiTrendingUp, FiTarget, FiClock, FiStar,
@@ -85,7 +82,7 @@ function StatCard({ icon: Icon, label, value, sub, trend, accent }) {
   return (
     <div className={`stat-card accent-${accent}`}>
       <div className="stat-top">
-        <div className="stat-icon"><Icon size={20} /></div>
+        <div className="stat-icon">{Icon({ size: 20 })}</div>
         {trend && (
           <span className="stat-trend">
             <FiTrendingUp size={12} /> {trend}
@@ -127,11 +124,7 @@ function ActivityRow({ item }) {
 /* ─── Dashboard ──────────────────────────────────────────────── */
 export default function Dashboard() {
   return (
-    <>
-      <TopNav />
-      <SidebarLayout />
-
-      <main className="dash-main">
+    <div className="dashboard-page">
 
         {/* Welcome banner */}
         <section className="welcome-banner">
@@ -301,7 +294,6 @@ export default function Dashboard() {
           </div>
         </section>
 
-      </main>
-    </>
+    </div>
   );
 }
