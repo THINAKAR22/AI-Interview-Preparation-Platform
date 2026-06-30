@@ -129,13 +129,10 @@ export default function Dashboard() {
         {/* Welcome banner */}
         <section className="welcome-banner">
           <div className="welcome-text">
-            <h1>Welcome back, Learner 👋</h1>
+            <h1>Welcome back, Learner </h1>
             <p>You're on a <strong>7-day streak</strong> — keep the momentum going!</p>
           </div>
           <div className="welcome-actions">
-            <button className="btn btn-primary">
-              <FiPlay size={16} /> Start Interview
-            </button>
             <button className="btn btn-ghost">
               <FiBook size={16} /> Browse Topics
             </button>
@@ -144,10 +141,10 @@ export default function Dashboard() {
 
         {/* Stat cards */}
         <section className="stat-grid">
-          <StatCard icon={FiTarget}   label="Questions Solved" value="245"  sub="+24 this week" trend="+14%" accent="indigo" />
-          <StatCard icon={FiClock}    label="Study Hours"      value="156h" sub="+18h this week" trend="+22%" accent="teal"   />
-          <StatCard icon={FiMic}      label="Mock Interviews"  value="18"   sub="2 scheduled"    trend="+3"   accent="amber"  />
-          <StatCard icon={FiStar}     label="Avg Score"        value="8.2"  sub="Out of 10"                   accent="green"  />
+          <StatCard icon={FiMic} label="Questions Solved" value="245"   accent="indigo" />
+          <StatCard icon={FiClock}    label="Study Hours"  value="156h"   accent="teal"   />
+          <StatCard icon={FiMic}      label="Mock Interviews"  value="18"    accent="amber"  />
+          <StatCard icon={FiStar}     label="Avg Score"   value="8.2"  accent="green"  />
         </section>
 
         {/* Charts row 1 */}
