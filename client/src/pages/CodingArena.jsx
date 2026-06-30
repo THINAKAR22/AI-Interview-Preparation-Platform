@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./CodingArena.css";
 
-function CodingArena() {
+const CodingArena = () => {
   const questions = [
     {
       title: "Reverse a String",
@@ -38,6 +38,7 @@ function CodingArena() {
   const [selectedQuestion, setSelectedQuestion] = useState(questions[0]);
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
+  const [isRunning, setIsRunning] = useState(false);
 
   const handleQuestionChange = (question) => {
     setSelectedQuestion(question);
@@ -51,70 +52,114 @@ function CodingArena() {
       return;
     }
 
-    setOutput("✅ Code executed successfully!");
+    setIsRunning(true);
+    setOutput("⏳ Executing...");
+
+    setTimeout(() => {
+      setOutput("✅ Code executed successfully!");
+      setIsRunning(false);
+    }, 800);
   };
 
   return (
     <div className="coding-arena">
-      {/* Question Sidebar */}
+      {/* Sidebar */}
       <div className="question-sidebar">
-        <h2>Questions</h2>
-
-        {questions.map((q, index) => (
-          <button
-            key={index}
-            className="question-btn"
-            onClick={() => handleQuestionChange(q)}
-          >
-            {q.title}
-          </button>
-        ))}
+        <div className="sidebar-header">
+          <i className="fas fa-code"></i>
+          <h2>Problems</h2>
+        </div>
+        <div className="question-list">
+          {questions.map((q, index) => (
+            <button
+              key={index}
+              className={`question-btn ${selectedQuestion.title === q.title ? "active" : ""}`}
+              onClick={() => handleQuestionChange(q)}
+            >
+              <i className="fas fa-circle"></i>
+              <span>{q.title}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Main Content */}
       <div className="main-content">
-        <h1>💻 Coding Arena</h1>
-
-        <div className="question-box">
-          <h2>{selectedQuestion.title}</h2>
-
-          <p>{selectedQuestion.description}</p>
-
-          <p>
-            <strong>Input:</strong> {selectedQuestion.input}
-          </p>
-
-          <p>
-            <strong>Output:</strong> {selectedQuestion.output}
-          </p>
+        {/* Header */}
+        <div className="arena-header">
+          <h1>
+            <i className="fas fa-terminal"></i> Coding Arena
+          </h1>
+          <div className="badge">
+            <i className="fas fa-check-circle"></i> 5 Problems
+          </div>
         </div>
 
-        <div className="editor-box">
-          <h2>Code Editor</h2>
+        {/* Question Box */}
+        <div className="question-box">
+          <h2>
+            <i className="fas fa-question-circle"></i> {selectedQuestion.title}
+          </h2>
+          <p className="description">{selectedQuestion.description}</p>
+          <div className="meta-grid">
+            <div className="meta-item">
+              <i className="fas fa-arrow-right"></i>
+              <strong>Input:</strong>
+              <span className="value">{selectedQuestion.input}</span>
+            </div>
+            <div className="meta-item">
+              <i className="fas fa-arrow-left"></i>
+              <strong>Output:</strong>
+              <span className="value">{selectedQuestion.output}</span>
+            </div>
+          </div>
+        </div>
 
+        {/* Editor Box */}
+        <div className="editor-box">
+          <div className="editor-header">
+            <i className="fas fa-edit"></i>
+            <h2>Code Editor</h2>
+            <div className="editor-actions">
+              <button className="action-btn" onClick={() => setCode("")}>
+                <i className="fas fa-eraser"></i> Clear
+              </button>
+            </div>
+          </div>
           <textarea
             className="code-editor"
-            rows="15"
+            rows="10"
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            placeholder="Write your code here..."
+            placeholder="// Write your solution here..."
+            spellCheck="false"
           />
-
-          <br />
-          <br />
-
-          <button className="run-btn" onClick={runCode}>
-            ▶ Run Code
-          </button>
+          <div className="editor-footer">
+            <button className="run-btn" onClick={runCode} disabled={isRunning}>
+              <i className={`fas ${isRunning ? "fa-spinner fa-spin" : "fa-play"}`}></i>
+              {isRunning ? " Running..." : " Run Code"}
+            </button>
+          </div>
         </div>
 
+        {/* Output Box */}
         <div className="output-box">
-          <h2>Output</h2>
-          <pre className="output-text">{output}</pre>
+          <div className="output-header">
+            <i className="fas fa-terminal"></i>
+            <h2>Output</h2>
+            {output && (
+              <button className="clear-output" onClick={() => setOutput("")}>
+                <i className="fas fa-times"></i>
+              </button>
+            )}
+          </div>
+          <pre className={`output-text ${output.includes("⚠️") ? "warning" : output.includes("✅") ? "success" : ""}`}>
+            {output || "// Your output will appear here"}
+          </pre>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default CodingArena;
