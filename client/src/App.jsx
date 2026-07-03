@@ -8,25 +8,34 @@ import ResumeAnalyzer from "./pages/ResumeAnalyzer";
 import Progress from "./pages/Progress";
 import Profile from "./pages/Profile";
 import "./App.css";
+import LoginPage from "./components/loginpage";
 
 export default function App() {
   return (
     <Router>
       <div className="app-shell">
-        <TopNav />
-        <SidebarLayout />
-
-        <main className="app-main">
-          <Routes>
-            <Route path="/" element={<Dashboardnew />} />
-            <Route path="/dashboard" element={<Dashboardnew />} />
-            <Route path="/coding-arena" element={<CodingArena />} />
-            <Route path="/mock-interview" element={<MockInterview />} />
-            <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
-            <Route path="/progress" element={<Progress />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </main>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route
+            path="/*"
+            element={
+              <>
+                <TopNav />
+                <SidebarLayout />
+                <main className="app-main">
+                  <Routes>
+                    <Route path="/dashboard" element={<Dashboardnew />} />
+                    <Route path="/coding-arena" element={<CodingArena />} />
+                    <Route path="/mock-interview" element={<MockInterview />} />
+                    <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
+                    <Route path="/progress" element={<Progress />} />
+                    <Route path="/profile" element={<Profile />} />
+                  </Routes>
+                </main>
+              </>
+            }
+          />
+        </Routes>
       </div>
     </Router>
   );
