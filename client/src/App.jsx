@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboardnew from "./pages/Dashboard_new";
 import TopNav from "./components/new_topnavbar";
@@ -11,17 +12,19 @@ import "./App.css";
 import LoginPage from "./components/loginpage";
 
 export default function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   return (
     <Router>
-      <div className="app-shell">
+      <div className={`app-shell ${sidebarOpen ? "sidebar-open" : "sidebar-closed"}`}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route
             path="/*"
             element={
               <>
-                <TopNav />
-                <SidebarLayout />
+                <TopNav sidebarOpen={sidebarOpen} onToggleSidebar={() => setSidebarOpen((open) => !open)} />
+                <SidebarLayout sidebarOpen={sidebarOpen} />
                 <main className="app-main">
                   <Routes>
                     <Route path="/dashboard" element={<Dashboardnew />} />

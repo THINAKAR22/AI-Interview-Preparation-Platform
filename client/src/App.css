@@ -77,6 +77,11 @@ img {
   margin-left: var(--sidebar-w);
   padding: calc(var(--topbar-h) + 24px) 28px 48px;
   overflow-x: hidden;
+  transition: margin-left 0.25s ease;
+}
+
+.app-shell.sidebar-closed .app-main {
+  margin-left: 0;
 }
 
 .app-main > * {
@@ -186,6 +191,14 @@ img {
   border-radius: var(--radius-sm);
 }
 
+.topnav-toggle-btn {
+  width: 42px;
+  margin-right: 12px;
+  color: var(--body);
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
 .start-btn {
   gap: 7px;
   padding: 0 16px;
@@ -269,20 +282,13 @@ img {
   overflow-y: auto;
   background: var(--surface);
   border-right: 1px solid var(--border);
-}
+    transition: transform 0.25s ease, width 0.25s ease, opacity 0.25s ease;
+  }
 
-.sidebar-progress-card {
-  padding: 14px 16px;
-  margin-bottom: 16px;
-  color: #fff;
-  background: linear-gradient(135deg, var(--indigo), #818cf8);
-  border-radius: var(--radius);
-}
-
-.progress-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  .sidebar.sidebar-collapsed {
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
   margin-bottom: 8px;
 }
 
@@ -420,6 +426,10 @@ img {
   .app-main {
     margin-left: 0;
     padding: calc(var(--topbar-h) + 16px) 16px 32px;
+  }
+
+  .topnav-toggle-btn {
+    display: inline-flex;
   }
 
   .topnav-brand {

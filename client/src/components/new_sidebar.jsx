@@ -33,9 +33,9 @@ const navGroups = [
   },
 ];
 
-export default function SidebarLayout() {
+export default function SidebarLayout({ sidebarOpen }) {
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${sidebarOpen ? "" : "sidebar-collapsed"}`} aria-hidden={!sidebarOpen}>
       <div className="sidebar-progress-card">
         <div className="progress-card-top">
           <span className="progress-card-label">Weekly Goal</span>

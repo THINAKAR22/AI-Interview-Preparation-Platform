@@ -1,9 +1,17 @@
 import { Link } from "react-router-dom";
-import { FiBell, FiChevronDown, FiSearch } from "react-icons/fi";
+import { FiBell, FiChevronDown, FiMenu, FiSearch, FiX } from "react-icons/fi";
 
-export default function TopNav() {
+export default function TopNav({ sidebarOpen, onToggleSidebar }) {
   return (
     <header className="topnav">
+      <button
+        className="topnav-icon-btn topnav-toggle-btn"
+        type="button"
+        onClick={onToggleSidebar}
+        aria-label={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
+      >
+        {sidebarOpen ? <FiX size={18} /> : <FiMenu size={18} />}
+      </button>
       <Link className="topnav-brand" to="/dashboard" aria-label="PrepAI dashboard">
         <div className="brand-icon">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
