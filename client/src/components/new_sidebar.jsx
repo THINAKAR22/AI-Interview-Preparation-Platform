@@ -12,6 +12,7 @@ import {
   FiUser,
   FiZap,
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const navGroups = [
   {
@@ -68,18 +69,18 @@ export default function SidebarLayout({ sidebarOpen }) {
       </nav>
 
       <div className="sidebar-footer">
-        <button className="nav-item" type="button">
+        <Link className="nav-item" to="/settings">
           <FiSettings size={18} className="nav-icon" />
           <span className="nav-label">Settings</span>
-        </button>
-        <button className="nav-item" type="button">
+        </Link>
+        <Link className="nav-item" to="/help">
           <FiHelpCircle size={18} className="nav-icon" />
           <span className="nav-label">Help</span>
-        </button>
-        <button className="nav-item nav-item-danger" type="button">
+        </Link>
+        <Link className="nav-item nav-item-danger" to="/">
           <FiLogOut size={18} className="nav-icon" />
           <span className="nav-label">Sign Out</span>
-        </button>
+        </Link>
       </div>
     </aside>
   );
