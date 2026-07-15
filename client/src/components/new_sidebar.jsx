@@ -22,6 +22,7 @@ const navGroups = [
       { icon: FiMic, label: "Mock Interview", to: "/mock-interview", badge: "3" },
       { icon: FiTarget, label: "Coding Arena", to: "/coding-arena" },
       { icon: FiFileText, label: "Resume Analyzer", to: "/resume-analyzer" },
+      { icon: FiHelpCircle, label: "HR Questions", to: "/hr-questions" },
     ],
   },
   {
@@ -77,7 +78,14 @@ export default function SidebarLayout({ sidebarOpen }) {
           <FiHelpCircle size={18} className="nav-icon" />
           <span className="nav-label">Help</span>
         </Link>
-        <Link className="nav-item nav-item-danger" to="/">
+        <Link
+          className="nav-item nav-item-danger"
+          to="/"
+          onClick={() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+          }}
+        >
           <FiLogOut size={18} className="nav-icon" />
           <span className="nav-label">Sign Out</span>
         </Link>

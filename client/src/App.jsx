@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Dashboardnew from "./pages/Dashboard_new";
 import TopNav from "./components/new_topnavbar";
 import SidebarLayout from "./components/new_sidebar";
@@ -8,8 +8,17 @@ import MockInterview from "./pages/MockInterview";
 import ResumeAnalyzer from "./pages/ResumeAnalyzer";
 import Progress from "./pages/Progress";
 import Profile from "./pages/Profile";
+import HRQuestions from "./pages/HRQuestions";
 import "./App.css";
 import LoginPage from "./components/loginpage";
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+}
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -22,7 +31,7 @@ export default function App() {
           <Route
             path="/*"
             element={
-              <>
+              <ProtectedRoute>
                 <TopNav sidebarOpen={sidebarOpen} onToggleSidebar={() => setSidebarOpen((open) => !open)} />
                 <SidebarLayout sidebarOpen={sidebarOpen} />
                 <main className="app-main">
@@ -33,9 +42,10 @@ export default function App() {
                     <Route path="/resume-analyzer" element={<ResumeAnalyzer />} />
                     <Route path="/progress" element={<Progress />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/hr-questions" element={<HRQuestions />} />
                   </Routes>
                 </main>
-              </>
+              </ProtectedRoute>
             }
           />
         </Routes>

@@ -38,19 +38,82 @@ export default function LoginPage() {
   const [mounted, setMounted] = useState(false);
   const [typedLines, setTypedLines] = useState(0);
 
+  const handleGoogleLoginCallback = async (response) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/google", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ credential: response.credential }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/dashboard");
+      } else {
+        alert(data.message || "Google Authentication Failed");
+      }
+    } catch (err) {
+      console.error("Auth Error:", err);
+      alert("Error contacting the auth server. Make sure the backend is running.");
+    }
+  };
+
   useEffect(() => {
     setMounted(true);
     const timers = TRANSCRIPT.map((_, i) =>
       setTimeout(() => setTypedLines((n) => Math.max(n, i + 1)), 500 + i * 900)
     );
-    return () => timers.forEach(clearTimeout);
+
+    // Dynamic Google script loading
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (window.google) {
+        window.google.accounts.id.initialize({
+          client_id: "123456789-abcdef.apps.googleusercontent.com",
+          callback: handleGoogleLoginCallback,
+        });
+        window.google.accounts.id.renderButton(
+          document.getElementById("google-signin-btn"),
+          { theme: "outline", size: "large", width: 312 }
+        );
+      }
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      timers.forEach(clearTimeout);
+      document.body.removeChild(script);
+    };
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Wire up to your auth flow here.
-    console.log({ email, password, remember });
-    navigate("/dashboard");
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/dashboard");
+      } else {
+        alert(data.message || "Invalid credentials");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error logging in.");
+    }
   };
 
   return (
@@ -548,10 +611,7 @@ export default function LoginPage() {
               <div className="divider-line" />
             </div>
 
-            <button type="button" className="google-btn">
-              <GoogleMark />
-              Continue with Google
-            </button>
+            <div id="google-signin-btn" style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }} />
           </div>
 
           <p className="signup-line">
