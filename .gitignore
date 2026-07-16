@@ -13,6 +13,9 @@ yarn-error.log*
 .env.*
 client/.env
 server/.env
+!.env.example
+!client/.env.example
+!server/.env.example
 
 # ------------------------------
 # Build files

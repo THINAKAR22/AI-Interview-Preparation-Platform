@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
+import { apiUrl } from "../config/api";
 
 /**
  * Login page for an AI interview-prep product.
@@ -33,6 +34,8 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(true);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mounted, setMounted] = useState(false);
@@ -40,7 +43,7 @@ export default function LoginPage() {
 
   const handleGoogleLoginCallback = async (response) => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/google", {
+      const res = await fetch(apiUrl("/auth/google"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,8 +77,12 @@ export default function LoginPage() {
     script.defer = true;
     script.onload = () => {
       if (window.google) {
+        const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+        if (!googleClientId) {
+          return;
+        }
         window.google.accounts.id.initialize({
-          client_id: "123456789-abcdef.apps.googleusercontent.com",
+          client_id: googleClientId,
           callback: handleGoogleLoginCallback,
         });
         window.google.accounts.id.renderButton(
@@ -95,12 +102,14 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const endpoint = isRegistering ? "register" : "login";
+      const payload = isRegistering ? { name, email, password } : { email, password };
+      const res = await fetch(apiUrl("/auth/" + endpoint), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
       if (data.success) {
@@ -108,12 +117,18 @@ export default function LoginPage() {
         localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/dashboard");
       } else {
-        alert(data.message || "Invalid credentials");
+        alert(data.message || (isRegistering ? "Unable to create your account" : "Invalid credentials"));
       }
     } catch (err) {
       console.error(err);
-      alert("Error logging in.");
+      alert(`Error ${isRegistering ? "creating your account" : "logging in"}. Make sure the backend is running.`);
     }
+  };
+
+  const toggleAuthMode = (e) => {
+    e.preventDefault();
+    setIsRegistering((current) => !current);
+    setPassword("");
   };
 
   return (
@@ -549,10 +564,25 @@ export default function LoginPage() {
           </div>
 
           <div className="card">
-            <h1>Welcome back</h1>
-            <p className="card-subtitle">Continue your interview prep.</p>
+            <h1>{isRegistering ? "Create your account" : "Welcome back"}</h1>
+            <p className="card-subtitle">
+              {isRegistering ? "Start practicing for your next interview." : "Continue your interview prep."}
+            </p>
 
             <form onSubmit={handleSubmit} className="field-group">
+              {isRegistering && (
+                <label className="field">
+                  <span className="field-label">Name</span>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name"
+                    className="field-input"
+                  />
+                </label>
+              )}
               <label className="field">
                 <span className="field-label">Email</span>
                 <input
@@ -587,7 +617,7 @@ export default function LoginPage() {
                 </div>
               </label>
 
-              <div className="row-between" style={{ marginTop: "-8px" }}>
+              {!isRegistering && <div className="row-between" style={{ marginTop: "-8px" }}>
                 <label className="remember-label">
                   <input
                     type="checkbox"
@@ -597,10 +627,10 @@ export default function LoginPage() {
                   <span>Remember me</span>
                 </label>
                 <a href="#" className="link">Forgot password?</a>
-              </div>
+              </div>}
 
               <button type="submit" className="submit-btn">
-                Log in
+                {isRegistering ? "Create account" : "Log in"}
                 <ArrowRight size={16} />
               </button>
             </form>
@@ -615,7 +645,10 @@ export default function LoginPage() {
           </div>
 
           <p className="signup-line">
-            New here? <a href="#" className="link">Sign up</a>
+            {isRegistering ? "Already have an account?" : "New here?"}{" "}
+            <a href="#" onClick={toggleAuthMode} className="link">
+              {isRegistering ? "Log in" : "Sign up"}
+            </a>
           </p>
         </div>
       </div>

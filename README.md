@@ -101,16 +101,21 @@ npm run dev
 
 ## 🔑 Environment Variables
 
-Create a `.env` file inside the **server** folder.
+Copy the example files and fill in the values:
+
+```bash
+copy server\\.env.example server\\.env
+copy client\\.env.example client\\.env
+```
+
+The backend uses `MONGO_URI` (not `MONGODB_URI`). The frontend's
+`VITE_API_URL` must end in `/api`. This project is configured to use
+`https://ai-interview-preparation-platform-dh6d.onrender.com/api`.
 
 ```env
-PORT=5000
-
-MONGODB_URI=your_mongodb_connection_string
-
+MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
-
-OPENAI_API_KEY=your_api_key
+CLIENT_URL=http://localhost:5173
 ```
 
 If using Gemini:
@@ -118,6 +123,31 @@ If using Gemini:
 ```env
 GEMINI_API_KEY=your_api_key
 ```
+
+---
+
+## Deploy on Render
+
+This repository includes [render.yaml](render.yaml), which creates both the
+Node API and an optional Render Static Site for the React frontend.
+
+1. Push this repository to GitHub and choose **New + → Blueprint** in Render.
+2. Select the repository. Render reads `render.yaml` and creates the services.
+3. For **ai-interview-api**, set `MONGO_URI` to your MongoDB Atlas connection
+   string. Allow Render's network in Atlas (or add the appropriate IP access
+   rule). Render generates `JWT_SECRET` automatically.
+4. The frontend is already configured to call
+   `https://ai-interview-preparation-platform-dh6d.onrender.com/api`.
+5. After the frontend deploys, set the API's `CLIENT_URL` to its exact public
+   URL (for example, `https://ai-interview-frontend.onrender.com`) and redeploy
+   the API.
+6. Confirm `https://<your-api>.onrender.com/api/health` returns a JSON health
+   response.
+
+If the frontend is hosted on Vercel or Netlify instead, deploy only the API
+service and use that site's URL for `CLIENT_URL`. For Google Sign-In, set
+`VITE_GOOGLE_CLIENT_ID` and add the deployed frontend domain to the OAuth
+client's authorized JavaScript origins in Google Cloud.
 
 ---
 
